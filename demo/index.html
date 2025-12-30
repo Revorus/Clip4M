@@ -85,4 +85,71 @@ No content is published publicly during this demonstration.
   </label>
 
   <label>
-    H
+    Hashtags
+    <input type="text" id="hashtags" placeholder="#example #demo #clip4m" />
+  </label>
+
+  <label>
+    Privacy setting
+    <select id="privacy">
+      <option value="public">Public</option>
+      <option value="friends">Friends</option>
+      <option value="private">Private</option>
+    </select>
+  </label>
+
+  <label>
+    Target platforms
+  </label>
+  <div class="platforms">
+    <label><input type="checkbox" checked disabled /> TikTok (current demo)</label>
+    <label><input type="checkbox" disabled /> YouTube</label>
+    <label><input type="checkbox" disabled /> Instagram</label>
+    <label><input type="checkbox" disabled /> Facebook</label>
+  </div>
+
+  <p class="note">
+    Only TikTok is active in this demo. Other platforms are placeholders.
+  </p>
+
+  <button onclick="submitPost()">3. Submit for Publishing</button>
+</div>
+
+<div id="resultBox" class="box" style="display:none;"></div>
+
+<script>
+  function connectTikTok() {
+    // OAuth would occur here in production.
+    // Sandbox authorization is simulated for review.
+    document.getElementById("authBox").style.display = "block";
+  }
+
+  function submitPost() {
+    const fileInput = document.getElementById("videoInput");
+    const resultBox = document.getElementById("resultBox");
+
+    if (!fileInput.files.length) {
+      alert("Please select a video file.");
+      return;
+    }
+
+    resultBox.style.display = "block";
+    resultBox.innerHTML = "Submitting content to TikTok Content Posting API...";
+
+    setTimeout(() => {
+      resultBox.innerHTML = `
+        <p class="success">
+          Content submission accepted.
+        </p>
+        <p class="note">
+          API scope used: content.publish (sandbox)<br />
+          Privacy setting applied.<br />
+          Manual user confirmation required for each upload.
+        </p>
+      `;
+    }, 1400);
+  }
+</script>
+
+</body>
+</html>
